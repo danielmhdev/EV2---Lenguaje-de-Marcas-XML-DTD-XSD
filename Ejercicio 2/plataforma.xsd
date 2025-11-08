@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<!-- Estructura Plataforma + refs-->
     <xs:element name="plataforma">
         <xs:complexType>
             <xs:sequence>
@@ -36,7 +37,142 @@
                     </xs:complexType>
                 </xs:element>
             </xs:sequence>
+         <!-- Atributos Plataforma-->
             <xs:attribute name="fecha_publicacion" type="xs:date" use="required"/>
         </xs:complexType>
     </xs:element>
+
+    <!-- Estructura Curso-->
+     <xs:element name="curso">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="titulo" type="xs:string"/>
+                <xs:element name="nivel" type="nivelCurso"/>
+                <xs:element name="modalidad" type="modalidadTipo"/>
+                <xs:element name="horas" type="xs:positiveInteger"/>
+                <xs:element ref="modulos" minOccurs="0"/>
+            </xs:sequence>
+                <!-- Atributos Curso-->
+            <xs:attribute name="id" type="xs:ID" use="required"/>
+            <xs:attribute name="codigo" type="xs:string" use="optional"/>
+        </xs:complexType>
+     </xs:element>
+
+     <xs:element name="modulos">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="modulo" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="nombre" type="xs:string"/>
+                            <xs:element name="horas" type="xs:positiveInteger"/>
+                        </xs:sequence>
+                    <!-- Atributos Modulo-->
+                        <xs:attribute name="clave" type="xs:string" use="optional"/>   
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+     </xs:element>
+     
+    <!-- Restricciones Curso-->
+     <xs:simpleType name="nivelCurso">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="Basico|Medio|Avanzado"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+     <xs:simpleType name="modalidadTipo">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="Online|Presencial"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <!-- Estructura Alumnos-->
+     <xs:element name="alumno">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="nombre" type="xs:string"/>
+                <xs:element name="email" type="emailTipo"/>
+                <xs:element name="telefono" type="telefonoTipo" minOccurs="0"/>
+            </xs:sequence>
+             <!-- Atributos Alumno-->
+            <xs:attribute name="id" type="xs:ID" use="required"/>
+            <xs:attribute name="nif" type="nifTipo" use="optional"/>
+        </xs:complexType> 
+     </xs:element>
+
+    <!-- Restricciones Alumno-->
+     <xs:simpleType name="emailTipo">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"/>
+        </xs:restriction>
+     </xs:simpleType>
+
+     <xs:simpleType name="telefonoTipo">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]{9}"/>
+        </xs:restriction>
+     </xs:simpleType>
+
+        <xs:simpleType name="nifTipo">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]{8}\-[A-Z]"/>
+        </xs:restriction>
+     </xs:simpleType>
+
+    <!-- Estructura Matricula-->
+
+    <xs:element name="matricula">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="fecha_alta" type="xs:date"/>
+                <xs:element name="estado" type="estadoMatricula"/>
+            </xs:sequence>
+            <!-- Atributos Matricula-->
+             <xs:attribute name="id" type="xs:ID" use="required"/>
+             <xs:attribute name="alumnoRef" type="xs:IDREF" use="required"/>
+             <xs:attribute name="cursoRef" type="xs:IDREF" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Restricciones Matrícula-->
+    <xs:simpleType name="estadoMatricula">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="Pagada|Pendiente"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+
+    <!-- Estructura Evaluacion-->
+     <xs:element name="evaluacion">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="instrumento" type="xs:string"/>
+                <xs:element name="convocatoria" type="convocatoriaTipo"/>
+                <xs:element name="nota" type="notaTipo"/>
+            </xs:sequence>
+            <!-- Atributos Evaluación-->
+            <xs:attribute name="id" type="xs:ID" use="required"/>
+            <xs:attribute name="matriculaRef" type="xs:IDREF" use="required"/>
+        </xs:complexType>
+     </xs:element>
+
+    <!-- Restricciones Evaluación-->
+     <xs:simpleType name="convocatoriaTipo">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Enero"/>
+            <xs:enumeration value="Diciembre"/>
+            <xs:enumeration value="Junio"/>
+            <xs:enumeration value="Julio"/>
+        </xs:restriction>
+    </xs:simpleType>
+
+    <xs:simpleType name="notaTipo">
+        <xs:restriction base="xs:decimal">
+            <xs:minInclusive value="0"/>
+            <xs:maxInclusive value="10"/>
+        </xs:restriction>
+    </xs:simpleType>
+
 </xs:schema>

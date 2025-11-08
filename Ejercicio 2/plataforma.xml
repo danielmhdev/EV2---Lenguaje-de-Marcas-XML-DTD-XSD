@@ -14,7 +14,7 @@
                     <nombre>Estructura del Corazón</nombre>
                     <horas>50</horas>
                 </modulo>
-                 <modulo clave ="A02">
+                 <modulo>
                     <nombre>Sistema esquelético</nombre>
                     <horas>100</horas>
                 </modulo>
@@ -24,19 +24,19 @@
         <curso id="A002">
             <titulo>Aparato Digestivo</titulo>
             <nivel>Avanzado</nivel>
-            <modalidad>Presencial</modalidad>
+            <modalidad>Online</modalidad>
             <horas>60</horas>        
         </curso>
     </cursos>
 
     <alumnos>
-        <alumno id="ABC-012" nif="1234567A">
+        <alumno id="ABC-012" nif="12345678-A">
             <nombre>Daniel</nombre>
             <email>daniel@gmail.com</email>
             <telefono>667898967</telefono>
         </alumno>
 
-        <alumno id="ABC-013" nif="123452B">
+        <alumno id="ABC-013" >
             <nombre>Raul</nombre>
             <email>raul@gmail.com</email>
         </alumno>
@@ -50,20 +50,20 @@
 
         <matricula id="ABC02" alumnoRef="ABC-013" cursoRef="A002">
             <fecha_alta>2025-10-03</fecha_alta>
-            <estado>Pendiente de Pago</estado>
+            <estado>Pendiente</estado>
         </matricula>
     </matriculas>
     
     <evaluaciones>
         <evaluacion id="M001" matriculaRef="ABC01">
             <instrumento>Endoscopio</instrumento>
-            <convocatoria>Febrero</convocatoria>
-            <nota>9</nota>
+            <convocatoria>Enero</convocatoria>
+            <nota>9.5</nota>
         </evaluacion>
 
         <evaluacion id="M002" matriculaRef="ABC02">
             <instrumento>Esqueleto humano</instrumento>
-            <convocatoria>Septiembre</convocatoria>
+            <convocatoria>Julio</convocatoria>
             <nota>8</nota>
         </evaluacion>
     </evaluaciones>

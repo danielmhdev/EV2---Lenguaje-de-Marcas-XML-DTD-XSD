@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--Un XSD que refine las validaciones (patrones de ISBN/ISSN, email, enumeraciones, etc.).-->
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <!-- Estructura Catalogo + refs-->
     <xs:element name="catalogo">
         <xs:complexType>
             <xs:sequence>
@@ -36,6 +37,7 @@
                     </xs:complexType>
                 </xs:element>
             </xs:sequence>
+            <!-- Atributos Catálogo-->
             <xs:attribute name="fecha" type="xs:date" use="required"/>
         </xs:complexType>
     </xs:element>
@@ -79,13 +81,14 @@
             </xs:sequence>
         </xs:complexType>
      </xs:element>
-    
+
+    <!-- Restricciones Libro-->
      <xs:simpleType name="isbnTipo">
         <xs:restriction base="xs:string">
             <xs:length value="13"/>
         </xs:restriction>
      </xs:simpleType>
-
+    <!-- Restricciones Autores-->
      <xs:simpleType name="orcidTipo">
         <xs:restriction base="xs:string">
             <xs:pattern value="[0-9]{4}\-[0-9]{4}\-[0-9]{4}\-[0-9]{4}"/>
@@ -107,6 +110,7 @@
         </xs:complexType>
      </xs:element>
 
+    <!-- Restricciones Revista-->
       <xs:simpleType name="issnTipo">
         <xs:restriction base="xs:string">
             <xs:pattern value="[0-9]{4}\-[0-9]{3}[X0-9]"/>
@@ -126,6 +130,8 @@
 
         </xs:complexType>
      </xs:element>
+
+    <!-- Restricciones Usuario-->
      <xs:simpleType name="emailTipo">
         <xs:restriction base="xs:string">
             <xs:pattern value="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"/>
@@ -146,13 +152,14 @@
                 <xs:element name="fecha_fin" type="xs:date" minOccurs="0"/>
                 <xs:element name="estado" type="estadoTipo"/>
             </xs:sequence>
-            <!-- Atributos Usuario-->
+            <!-- Atributos Prestamo-->
             <xs:attribute name="id" type="xs:ID" use="required"/>
             <xs:attribute name="itemRef" type="xs:IDREF" use="required"/>
             <xs:attribute name="usuarioRef" type="xs:IDREF" use="required"/>
         </xs:complexType>
       </xs:element>
 
+    <!-- Restricciones Prestamo-->
       <xs:simpleType name="estadoTipo">
         <xs:restriction base="xs:string">
             <xs:pattern value="devuelto|en_curso"/>
