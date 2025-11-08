@@ -55,7 +55,7 @@
             <xs:attribute name="id" type="xs:ID" use="required"/>
             <xs:attribute name="categoria" type="xs:string" use="required"/>
             <xs:attribute name="isbn" type="isbnTipo" use="required"/>
-            <xs:attribute name="paginas" type="xs:positiveInteger" use="optional"></xs:attribute>
+            <xs:attribute name="paginas" type="xs:positiveInteger" use="optional"/>
         </xs:complexType>
      </xs:element>
 
