@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<!DOCTYPE plataforma SYSTEM "plataforma.dtd">-->
+
+
+<plataforma fecha_publicacion="2025-10-04" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="plataforma.xsd">
+    <cursos>
+        <curso id="A001" codigo="123456ABC">
+            <titulo>Anatomía</titulo>
+            <nivel>Basico</nivel>
+            <modalidad>Presencial</modalidad>
+            <horas>150</horas>
+            <modulos>
+                <modulo clave ="A01">
+                    <nombre>Estructura del Corazón</nombre>
+                    <horas>50</horas>
+                </modulo>
+                 <modulo clave ="A02">
+                    <nombre>Sistema esquelético</nombre>
+                    <horas>100</horas>
+                </modulo>
+            </modulos>
+        </curso>
+
+        <curso id="A002">
+            <titulo>Aparato Digestivo</titulo>
+            <nivel>Avanzado</nivel>
+            <modalidad>Presencial</modalidad>
+            <horas>60</horas>        
+        </curso>
+    </cursos>
+
+    <alumnos>
+        <alumno id="ABC-012" nif="1234567A">
+            <nombre>Daniel</nombre>
+            <email>daniel@gmail.com</email>
+            <telefono>667898967</telefono>
+        </alumno>
+
+        <alumno id="ABC-013" nif="123452B">
+            <nombre>Raul</nombre>
+            <email>raul@gmail.com</email>
+        </alumno>
+    </alumnos>
+
+    <matriculas>
+        <matricula id="ABC01" alumnoRef="ABC-012" cursoRef="A002">
+            <fecha_alta>2025-10-02</fecha_alta>
+            <estado>Pagada</estado>
+        </matricula>
+
+        <matricula id="ABC02" alumnoRef="ABC-013" cursoRef="A002">
+            <fecha_alta>2025-10-03</fecha_alta>
+            <estado>Pendiente de Pago</estado>
+        </matricula>
+    </matriculas>
+    
+    <evaluaciones>
+        <evaluacion id="M001" matriculaRef="ABC01">
+            <instrumento>Endoscopio</instrumento>
+            <convocatoria>Febrero</convocatoria>
+            <nota>9</nota>
+        </evaluacion>
+
+        <evaluacion id="M002" matriculaRef="ABC02">
+            <instrumento>Esqueleto humano</instrumento>
+            <convocatoria>Septiembre</convocatoria>
+            <nota>8</nota>
+        </evaluacion>
+    </evaluaciones>
+</plataforma>

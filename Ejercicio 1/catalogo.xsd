@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--Un XSD que refine las validaciones (patrones de ISBN/ISSN, email, enumeraciones, etc.).-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="catalogo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="libros">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element ref="libro" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+
+               <xs:element name="revistas">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element ref="revista" maxOccurs="unbounded"/>
+                         </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+
+                <xs:element name="usuarios">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element ref="usuario" maxOccurs="unbounded"/>
+                         </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+
+                <xs:element name="prestamos">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element ref="prestamo" maxOccurs="unbounded"/>
+                         </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="fecha" type="xs:date" use="required"/>
+        </xs:complexType>
+    </xs:element>
+
+    <!-- Estructura Libro-->
+     <xs:element name="libro">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="titulo" type="xs:string"/>
+                <xs:element name="anio" type="xs:gYear"/>
+                <xs:element ref="autores"/>
+                <xs:element ref="etiquetas" minOccurs="0"/>
+            </xs:sequence>
+                <!-- Atributos Libro-->
+            <xs:attribute name="id" type="xs:ID" use="required"/>
+            <xs:attribute name="categoria" type="xs:string" use="required"/>
+            <xs:attribute name="isbn" type="isbnTipo" use="required"/>
+            <xs:attribute name="paginas" type="xs:positiveInteger" use="optional"></xs:attribute>
+        </xs:complexType>
+     </xs:element>
+
+     <xs:element name="autores">
+        <xs:complexType>
+           <xs:sequence>
+            <xs:element name="autor" maxOccurs="unbounded">
+                 <xs:complexType>
+                     <xs:sequence>
+                        <xs:element name="nombre" type="xs:string"/>
+                        <xs:element name="orcid" type="orcidTipo" minOccurs="0"/>
+                    </xs:sequence>
+                 </xs:complexType>
+            </xs:element>
+           </xs:sequence>
+        </xs:complexType>
+     </xs:element>
+
+     <xs:element name="etiquetas">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="etiqueta" type="xs:string" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+     </xs:element>
+    
+     <xs:simpleType name="isbnTipo">
+        <xs:restriction base="xs:string">
+            <xs:length value="13"/>
+        </xs:restriction>
+     </xs:simpleType>
+
+     <xs:simpleType name="orcidTipo">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]{4}\-[0-9]{4}\-[0-9]{4}\-[0-9]{4}"/>
+        </xs:restriction>
+     </xs:simpleType>
+
+    <!-- Estructura Revista-->
+     <xs:element name="revista">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="titulo" type="xs:string"/>
+                <xs:element name="anio" type="xs:gYear"/>
+            </xs:sequence>
+            <!-- Atributos Revista-->
+             <xs:attribute name="id" type="xs:ID" use="required"/>
+             <xs:attribute name="area" type="xs:string" use="required"/>
+             <xs:attribute name="issn" type="issnTipo" use="required"/>
+             <xs:attribute name="numero" type="xs:positiveInteger" use="required"/>
+        </xs:complexType>
+     </xs:element>
+
+      <xs:simpleType name="issnTipo">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[0-9]{4}\-[0-9]{3}[X0-9]"/>
+        </xs:restriction>
+     </xs:simpleType>
+
+    <!-- Estructura Usuario-->
+     <xs:element name="usuario">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="nombre" type="xs:string"/>
+                <xs:element name="email" type="emailTipo"/>
+            </xs:sequence>
+            <!-- Atributos Usuario-->
+             <xs:attribute name="id" type="xs:ID" use="required"/>
+             <xs:attribute name="tipo" type="usuarioTipo" use="required"/>
+
+        </xs:complexType>
+     </xs:element>
+     <xs:simpleType name="emailTipo">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"/>
+        </xs:restriction>
+     </xs:simpleType>
+
+     <xs:simpleType name="usuarioTipo">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="alumno|profesor"/>
+        </xs:restriction>
+     </xs:simpleType>
+
+     <!-- Estructura Prestamo-->
+      <xs:element name="prestamo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="fecha_inicio" type="xs:date"/>
+                <xs:element name="fecha_fin" type="xs:date" minOccurs="0"/>
+                <xs:element name="estado" type="estadoTipo"/>
+            </xs:sequence>
+            <!-- Atributos Usuario-->
+            <xs:attribute name="id" type="xs:ID" use="required"/>
+            <xs:attribute name="itemRef" type="xs:IDREF" use="required"/>
+            <xs:attribute name="usuarioRef" type="xs:IDREF" use="required"/>
+        </xs:complexType>
+      </xs:element>
+
+      <xs:simpleType name="estadoTipo">
+        <xs:restriction base="xs:string">
+            <xs:pattern value="devuelto|en_curso"/>
+        </xs:restriction>
+      </xs:simpleType>
+</xs:schema>
