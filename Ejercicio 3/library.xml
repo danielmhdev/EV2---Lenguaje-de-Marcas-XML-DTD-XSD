@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<!DOCTYPE library SYSTEM "library.dtd">-->
+
+<library xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="library.xsd">
+    <book>
+        <title>La Comunidad del Anillo</title>
+        <author>J.R.R. Tolkien</author>
+        <year>1954</year>
+        <publisher>George Allen</publisher>
+        <pages>680</pages>
+    </book>
+    <book>
+        <title>Las Dos Torres</title>
+        <author>J.R.R. Tolkien</author>
+        <year>1954</year>
+        <publisher>George Allen</publisher>
+        <pages>640</pages>
+    </book>
+    <book>
+        <title>El Retorno del Rey</title>
+        <author>J.R.R. Tolkien</author>
+        <year>1955</year>
+        <publisher>George Allen</publisher>
+        <pages>670</pages>
+    </book>
+
+</library>
