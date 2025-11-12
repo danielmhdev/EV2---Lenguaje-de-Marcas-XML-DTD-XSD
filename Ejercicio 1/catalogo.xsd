@@ -138,11 +138,12 @@
         </xs:restriction>
      </xs:simpleType>
 
-     <xs:simpleType name="usuarioTipo">
-        <xs:restriction base="xs:string">
-            <xs:pattern value="alumno|profesor"/>
-        </xs:restriction>
-     </xs:simpleType>
+    <xs:simpleType name="usuarioTipo">
+       <xs:restriction base="xs:string">
+           <xs:enumeration value="alumno"/>
+           <xs:enumeration value="profesor"/>
+       </xs:restriction>
+    </xs:simpleType>
 
      <!-- Estructura Prestamo-->
       <xs:element name="prestamo">
@@ -160,9 +161,11 @@
       </xs:element>
 
     <!-- Restricciones Prestamo-->
-      <xs:simpleType name="estadoTipo">
-        <xs:restriction base="xs:string">
-            <xs:pattern value="devuelto|en_curso"/>
-        </xs:restriction>
-      </xs:simpleType>
+    <xs:simpleType name="estadoTipo">
+       <xs:restriction base="xs:string">
+           <xs:enumeration value="devuelto"/>
+           <xs:enumeration value="en_curso"/>
+       </xs:restriction>
+    </xs:simpleType>
 </xs:schema>
+
